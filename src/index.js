@@ -76,11 +76,19 @@ function Menu() {
       {/*Short circuit, if the first condition false then the code stop there and add TERNARIES Operator*/}
 
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        // <> </> this is a react fragment
+        <>
+          <p>
+            Number 1 authentic Italian cuisine. 6 pizzas to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu</p>
       )}
@@ -132,14 +140,16 @@ function Order({ closeHour, openHour }) {
 
 function Pizza({ pizzaObj }) {
   return (
-    <div className="pizza">
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+
+        {/*{pizzaObj.soldOut ? <span>Sold Out</span> : <span>pizzaObj.price</span>}*/}
+        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
