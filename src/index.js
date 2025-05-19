@@ -73,8 +73,7 @@ function Menu() {
   return (
     <menu className="menu">
       <h2>Our Menu</h2>
-
-      {/*Short circuit, if the first condition false then the code stop there*/}
+      {/*Short circuit, if the first condition false then the code stop there and add TERNARIES Operator*/}
 
       {numPizzas > 0 ? (
         <ul className="pizzas">
