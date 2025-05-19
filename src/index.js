@@ -109,24 +109,35 @@ function Footer() {
   return (
     <footer className="footer">
       {/*{new Date().toLocaleTimeString()} We're Open Now*/}
-      <div className="order">
-        {isOpen && (
-          <p>We're open until {closeHour}, please visit us or order online</p>
-        )}
-        <button className="btn">Order</button>
-      </div>
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        <p>We are happy to meet you in the working hours</p>
+      )}
     </footer>
   );
 }
 
-function Pizza(props) {
+function Order({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      <p>
+        We're open from {openHour} until {closeHour}, please visit us or order
+        online
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
+}
+
+function Pizza({ pizzaObj }) {
   return (
     <div className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </div>
   );
