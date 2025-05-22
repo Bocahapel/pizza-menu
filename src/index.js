@@ -47,6 +47,7 @@ const pizzaData = [
   },
 ];
 
+//this is the main App function where all component filed together
 function App() {
   return (
     <div className="container">
@@ -57,6 +58,7 @@ function App() {
   );
 }
 
+//this is the header component
 function Header() {
   return (
     <header className="header">
@@ -65,6 +67,8 @@ function Header() {
   );
 }
 
+//this is the menu component where dev store MENU TAGLINE, MENU ARRAY DESTRUCTURING where we instruct the computer to
+//print each pizza detail as long there is something inside the pizza array using pizzas.map(pizza)
 function Menu() {
   //const pizzas = [];
 
@@ -82,7 +86,7 @@ function Menu() {
             Number 1 authentic Italian cuisine. 6 pizzas to choose from. All
             from our stone oven, all organic, all delicious.
           </p>
-
+          {/*this pizzaObj include all pizza detail from pizzaData, then we pass the pizzaObj to pizza component*/}
           <ul className="pizzas">
             {pizzas.map((pizza) => (
               <Pizza pizzaObj={pizza} key={pizza.name} />
@@ -108,6 +112,25 @@ function Menu() {
   );
 }
 
+//this is the pizza component used in MENU component, where this component get the breakdown data from MENU and
+//this component layout all the details, then the MENU display <Pizza /> with all the details breakdown
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
+  return (
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+      <div>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+
+        {/*{pizzaObj.soldOut ? <span>Sold Out</span> : <span>pizzaObj.price</span>}*/}
+        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
+      </div>
+    </li>
+  );
+}
+
+//this is footer component where dev store GETHOUR Variable, TAGLINE
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 10;
@@ -135,21 +158,6 @@ function Order({ closeHour, openHour }) {
       </p>
       <button className="btn">Order</button>
     </div>
-  );
-}
-
-function Pizza({ pizzaObj }) {
-  return (
-    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
-      <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-
-        {/*{pizzaObj.soldOut ? <span>Sold Out</span> : <span>pizzaObj.price</span>}*/}
-        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
-      </div>
-    </li>
   );
 }
 
