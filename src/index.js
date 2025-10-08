@@ -58,105 +58,40 @@ function App() {
   );
 }
 
-//this is the header component
 function Header() {
   return (
-    <header className="header">
-      <h1 style={{ color: "red" }}>Fast React Pizza Co.</h1>
-    </header>
+    <div>
+      <h1 style={{ color: "red", fontSize: "44" }}>Pizza & Co.</h1>
+    </div>
   );
 }
 
-//this is the menu component where dev store MENU TAGLINE, MENU ARRAY DESTRUCTURING where we instruct the computer to
-//print each pizza detail as long there is something inside the pizza array using pizzas.map(pizza)
 function Menu() {
-  //const pizzas = [];
-
-  const pizzas = pizzaData;
-  const numPizzas = pizzas.length;
   return (
-    <menu className="menu">
+    <div>
       <h2>Our Menu</h2>
-      {/*Short circuit, if the first condition false then the code stop there and add TERNARIES Operator*/}
-
-      {numPizzas > 0 ? (
-        // <> </> this is a react fragment
-        <>
-          <p>
-            Number 1 authentic Italian cuisine. 6 pizzas to choose from. All
-            from our stone oven, all organic, all delicious.
-          </p>
-          {/*this pizzaObj include all pizza detail from pizzaData, then we pass the pizzaObj to pizza component*/}
-          <ul className="pizzas">
-            {pizzas.map((pizza) => (
-              <Pizza pizzaObj={pizza} key={pizza.name} />
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p>We're still working on our menu</p>
-      )}
-      {/*<Pizza
-        name="Pizza Margherita"
-        ingredients="Tomato and mozarella"
-        price={10}
-        image="Pizza/margherita.jpg"
-      />
-      <Pizza
-        name="Pizza Focaccia"
-        ingredients="Bread with italian olive oil and rosemary"
-        price={6}
-        image="Pizza/focaccia.jpg"
-      />*/}
-    </menu>
+      <Pizza />
+    </div>
   );
 }
 
-//this is the pizza component used in MENU component, where this component get the breakdown data from MENU and
-//this component layout all the details, then the MENU display <Pizza /> with all the details breakdown
-function Pizza({ pizzaObj }) {
-  console.log(pizzaObj);
-  return (
-    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
-      <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-
-        {/*{pizzaObj.soldOut ? <span>Sold Out</span> : <span>pizzaObj.price</span>}*/}
-        <span>{pizzaObj.soldOut ? "Sold Out" : pizzaObj.price}</span>
-      </div>
-    </li>
-  );
-}
-
-//this is footer component where dev store GETHOUR Variable, TAGLINE
 function Footer() {
   const hour = new Date().getHours();
   const openHour = 10;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
-
   return (
-    <footer className="footer">
-      {/*{new Date().toLocaleTimeString()} We're Open Now*/}
-      {isOpen ? (
-        <Order closeHour={closeHour} openHour={openHour} />
-      ) : (
-        <p>We are happy to meet you in the working hours</p>
-      )}
+    <footer>
+      {new Date().toLocaleTimeString()}{" "}
+      {isOpen ? "We're Currently Open" : "Sorry We're Currently Closed"}
     </footer>
   );
 }
 
-function Order({ closeHour, openHour }) {
+function Pizza() {
   return (
-    <div className="order">
-      <p>
-        We're open from {openHour} until {closeHour}, please visit us or order
-        online
-      </p>
-      <button className="btn">Order</button>
+    <div>
+      <h1>Pizza</h1>
     </div>
   );
 }
