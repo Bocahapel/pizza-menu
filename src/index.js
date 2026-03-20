@@ -79,15 +79,20 @@ function Menu() {
           />
         ))}
       </div>
-
-      {/*       
-      <Pizza
-        name="Focaccia"
-        ingredients="Bread with italian olive oil and rosemary"
-        photoName="./pizzas/focaccia.jpg"
-        price={6}
-      /> */}
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price}</span>
+      </div>
+    </div>
   );
 }
 
@@ -104,19 +109,6 @@ function Footer() {
     <footer className="footer">
       Now at {hour}, and we are currently {isOpen ? "open" : "close"}
     </footer>
-  );
-}
-
-function Pizza(props) {
-  return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
-      <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
-      </div>
-    </div>
   );
 }
 
