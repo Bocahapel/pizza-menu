@@ -2,48 +2,70 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-const pizzaData = [
+const gundamData = [
   {
-    name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
+    name: "GNY-001 Gundam Astraea",
+    details:
+      "A 2nd generation Gundam introduced in the Mobile Suit Gundam 00P side story. Known pilots include Ruido Resonance and Chall Acustica.",
     price: 6,
-    photoName: "./pizzas/focaccia.jpg",
-    soldOut: false,
+    photoName: "./gundams/astraea.jpg",
+    build: true,
   },
   {
-    name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
-    price: 10,
-    photoName: "./pizzas/margherita.jpg",
-    soldOut: false,
+    name: "GN-001 Gundam Exia",
+    details:
+      "A mobile suit introduced in season one of Mobile Suit Gundam 00 and is piloted by Setsuna F. Seiei.",
+    price: 6,
+    photoName: "gundams/exia.jpg",
+    build: true,
   },
   {
-    name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-    price: 12,
-    photoName: "./pizzas/spinaci.jpg",
-    soldOut: false,
+    name: "GN-002 Gundam Dynames",
+    details:
+      "A mobile suit introduced in season one of Mobile Suit Gundam 00 and is piloted by Lockon Stratos.",
+    price: 6,
+    photoName: "gundams/dynames.jpg",
+    build: true,
   },
   {
-    name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
-    price: 12,
-    photoName: "./pizzas/funghi.jpg",
-    soldOut: false,
+    name: "GN-003 Gundam Kyrios",
+    details:
+      "A mobile suit featured in season one of Mobile Suit Gundam 00 and is piloted by Allelujah Haptism.",
+    price: 6,
+    photoName: "gundams/kyrios.jpg",
+    build: false,
   },
   {
-    name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
-    price: 15,
-    photoName: "./pizzas/salamino.jpg",
-    soldOut: true,
+    name: "GN-004 Gundam Nadleeh",
+    details:
+      "A mobile suit introduced in season one of Mobile Suit Gundam 00. It is piloted by Tieria Erde.",
+    price: 6,
+    photoName: "gundams/nadleeh.jpg",
+    build: true,
   },
   {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    photoName: "./pizzas/prosciutto.jpg",
-    soldOut: false,
+    name: "GN-005 Gundam Virtue",
+    details:
+      "A mobile suit introduced in season one of Mobile Suit Gundam 00. It is piloted by Tieria Erde. ",
+    price: 6,
+    photoName: "gundams/virtue.jpg",
+    build: true,
+  },
+  {
+    name: "GN-0000+GNR-010 00 Raiser",
+    details:
+      "A combined form of GN-0000 00 Gundam and GNR-010 0 Raiser introduced in season 2 of Mobile Suit Gundam 00.",
+    price: 6,
+    photoName: "gundams/raiser.jpg",
+    build: false,
+  },
+  {
+    name: "GNT-0000 00 Qan[T] ",
+    details:
+      "successor to the GN-0000+GNR-010 00 Raiser introduced in the movie Mobile Suit Gundam 00 The Movie -A wakening of the Trailblazer-. It is piloted by Setsuna F. Seiei. ",
+    price: 6,
+    photoName: "gundams/qant.jpg",
+    build: true,
   },
 ];
 
@@ -51,7 +73,7 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <Menu />
+      <List />
       <Footer />
     </div>
   );
@@ -60,22 +82,22 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <h1>Pizzaria & Co.</h1>
+      <h1>Gundam Collection List</h1>
     </header>
   );
 }
 
-function Menu() {
-  const pizzas = pizzaData;
-  const numPizzas = pizzas.length;
+function List() {
+  const gunplas = gundamData;
+  const numGunplas = gunplas.length;
 
   return (
-    <main className="menu">
-      <h1>Our Menu</h1>
-      {numPizzas > 0 && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
+    <main className="list">
+      <h1>My Gundams</h1>
+      {numGunplas > 0 && (
+        <ul className="gunplas">
+          {gunplas.map((gunpla) => (
+            <Gunpla gunplaObj={gunpla} key={gunpla.name} />
           ))}
         </ul>
       )}
@@ -83,50 +105,23 @@ function Menu() {
   );
 }
 
-function Pizza({ pizzaObj }) {
-  if (pizzaObj.soldOut) {
-    return null;
-  }
+function Gunpla({ gunplaObj }) {
   return (
-    <li className="pizza">
-      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
+    <li className={`gunpla ${gunplaObj.build ? "" : "sold-out"}`}>
+      <img src={gunplaObj.photoName} alt={gunplaObj.name} />
       <div>
-        <h3>{pizzaObj.name}</h3>
-        <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        <h3>{gunplaObj.name}</h3>
+        <p>{gunplaObj.build ? gunplaObj.details : "Missing"}</p>
       </div>
     </li>
   );
 }
 
 function Footer() {
-  const hour = new Date().getHours();
-
-  const openHour = 12;
-  const closeHour = 22;
-  const isOpen = hour >= openHour && hour <= closeHour;
-
-  console.log(isOpen);
-
   return (
     <footer className="footer">
-      {isOpen ? (
-        <Order closeHour={closeHour} />
-      ) : (
-        <p>
-          We're happy to welcome you between {openHour} and {closeHour}
-        </p>
-      )}
+      <p>I build and collect</p>
     </footer>
-  );
-}
-
-function Order({ closeHour }) {
-  return (
-    <div className="order">
-      <p>We're open until {closeHour}:00, Come visit us or order Online</p>
-      <button className="btn">order</button>
-    </div>
   );
 }
 
